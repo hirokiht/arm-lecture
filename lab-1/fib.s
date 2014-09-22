@@ -14,10 +14,10 @@ fibonacci:
 	push {r4, r5, lr}
 
 	subs r4 ,r0, #1
-	itt le
-	pople {r4, r5, pc}		@EPILOG
-	bxle lr				@ R0 <= 1, return R0
-
+	bgt .L3
+	pop {r4, r5, pc}		@EPILOG
+	bx lr				@ R0 <= 1, return R0
+.L3:
 	mov r0, r4	@ Recursive call to fibonacci with R4 (R0 - 1) as parameter
 	bl fibonacci
 
